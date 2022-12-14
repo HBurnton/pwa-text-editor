@@ -22,12 +22,32 @@ module.exports = () => {
         template: './index.html',
         title: 'Text Editor',
       }),
+
       new MiniCssExtractPlugin(),
+
       new InjectManifest({
         swSrc: './src/sw.js',
         swDest: 'service-worker.js',
       }), 
       
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: 'JATE Text Editor',
+        short_name: 'JATE',
+        description: 'A PWA TEXT EDITOR!',
+        background_color: '#31a9e1',
+        theme_color: '31a9e1',
+        start_url: './',
+        publicPath: './',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      }),
     ],
 
     module: {
